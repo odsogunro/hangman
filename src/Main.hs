@@ -10,7 +10,9 @@ import Data.List (intersperse)
 import System.Exit (exitSuccess)
 import System.Random (randomRIO)
 
-type WordList = [String]
+--type WordList = [String]
+newtype WordList = WordList [String]
+    deriving (Eq, Show)
 
 {-
 String: the word to be guessed
@@ -29,7 +31,7 @@ instance Show Puzzle where
 allWords :: IO WordList
 allWords = do
             dict <- readFile "data/dict.txt"
-            return (lines dict)
+            return $ WordList (lines dict)
 
 minWordLength :: Int
 minWordLength = 5
@@ -39,13 +41,13 @@ maxWordLength = 9
 
 gameWords :: IO WordList
 gameWords = do
-             aw <- allWords
-             return (filter gameLength aw)
+             (WordList aw) <- allWords
+             return $ WordList (filter gameLength aw)
              where gameLength w = let l = length (w :: String) 
                                   in l > minWordLength && l < maxWordLength
 
 randomWord :: WordList -> IO String
-randomWord wl = do
+randomWord (WordList wl) = do
                  randomIndex <- randomRIO (0, (-) (length wl) 1)
                  return $ wl !! randomIndex
 
