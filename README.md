@@ -2,6 +2,10 @@
 
 *vagrant: issues*
 ```
+solutions: 
+- https://www.virtualbox.org/wiki/Linux_Downloads
+-- https://www.virtualbox.org/wiki/Downloads
+          
 ==> default: Checking for guest additions in VM...
     default: The guest additions on this VM do not match the installed version of
     default: VirtualBox! In most cases this is fine, but in rare cases it can
